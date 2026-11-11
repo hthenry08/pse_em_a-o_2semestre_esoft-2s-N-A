@@ -1,0 +1,53 @@
+digraph G {
+  graph [rankdir=TB, nodesep=0.22, ranksep=0.30, fontname="DejaVu Sans", bgcolor=white, pad=0.15, splines=true];
+  node  [fontname="DejaVu Sans", fontsize=12, style="filled", fillcolor="#F2F2F2", color="#555555", penwidth=1.1, margin="0.12,0.06"];
+  edge  [fontname="DejaVu Sans", fontsize=11, color="#444444", arrowsize=0.7, penwidth=1.0];
+  A [label="Início", shape=box, style="rounded,filled", fillcolor="#D9E2F3"];
+  B [label="Exibir aviso de\nprivacidade", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  C [label="Exibir menu com\ntotal de ações", shape=box];
+  D [label="Ler opção", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  E [label="Opção é um\nnúmero inteiro?", shape=diamond];
+  E1 [label="Erro: entrada\ninválida", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  F [label="  Qual opção?  ", shape=diamond];
+  G [label="Cadastrar\nação", shape=box];
+  H [label="Listar\nações", shape=box];
+  I [label="Pesquisar\nação", shape=box];
+  J [label="Atualizar situação\ne registrar\nparticipantes", shape=box];
+  K [label="Gerar resumo\ngeral e por\nescola", shape=box];
+  L [label="Carregar dados\nde demonstração", shape=box];
+  M [label="Confirma\nsaída? S/N", shape=diamond];
+  N [label="Erro: opção\ninexistente", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  Z [label="Fim", shape=box, style="rounded,filled", fillcolor="#D9E2F3"];
+  P [label="Pressione\nENTER", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  A -> B [];
+  B -> C [];
+  C -> D [];
+  D -> E [];
+  E -> E1 [label="Não"];
+  E1 -> D [constraint=false];
+  E -> F [label="Sim"];
+  F -> M [label="0"];
+  F -> G [label="1"];
+  F -> H [label="2"];
+  F -> I [label="3"];
+  F -> J [label="4"];
+  F -> K [label="5"];
+  F -> L [label="6"];
+  F -> N [label="outra"];
+  M -> Z [label="Sim"];
+  M -> P [label="Não"];
+  G -> P [];
+  H -> P [];
+  I -> P [];
+  J -> P [];
+  K -> P [];
+  L -> P [];
+  N -> P [];
+  P -> C [constraint=false];
+  {rank=same; G; H; I; J; K; L;}
+  G->H->I->J->K->L [style=invis];
+  {rank=same; M; N;}
+  M->N [style=invis];
+  G->M [style=invis]; 
+  {rank=same; Z; P;}
+}

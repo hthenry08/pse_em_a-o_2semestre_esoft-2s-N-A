@@ -1,0 +1,30 @@
+@startuml
+   left to right direction
+   actor "Coordenador(a)\ndo PSE" as Coord
+   actor "Profissional de saúde\nda APS" as Saude
+   actor "Representante\nda escola" as Escola
+   actor "Membro da equipe\nintersetorial" as Membro
+
+   Coord --|> Membro
+   Saude --|> Membro
+   Escola --|> Membro
+
+   rectangle "Sistema PSE em Ação" {
+     usecase "UC01 Cadastrar ação" as UC01
+     usecase "UC02 Listar ações" as UC02
+     usecase "UC03 Pesquisar ação\n(código, escola ou tema)" as UC03
+     usecase "UC04 Atualizar situação" as UC04
+     usecase "UC05 Registrar participantes" as UC05
+     usecase "UC06 Gerar resumo geral" as UC06
+     usecase "UC07 Carregar dados\nde demonstração" as UC07
+   }
+
+   Membro -- UC01
+   Membro -- UC02
+   Membro -- UC03
+   Membro -- UC04
+   Membro -- UC06
+   Membro -- UC07
+   UC05 ..> UC01 : <<extend>>
+   UC05 ..> UC04 : <<extend>>
+   @enduml

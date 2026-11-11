@@ -1,0 +1,42 @@
+digraph G {
+  graph [rankdir=TB, nodesep=0.22, ranksep=0.30, fontname="DejaVu Sans", bgcolor=white, pad=0.15, splines=true];
+  node  [fontname="DejaVu Sans", fontsize=12, style="filled", fillcolor="#F2F2F2", color="#555555", penwidth=1.1, margin="0.12,0.06"];
+  edge  [fontname="DejaVu Sans", fontsize=11, color="#444444", arrowsize=0.7, penwidth=1.0];
+  X [label="A", shape=circle, width=0.4, fixedsize=false];
+  F [label="Ler quantidade prevista", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  F1 [label="Entre 1 e 99999?", shape=diamond];
+  F2 [label="Erro: quantidade negativa\nou inválida", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  G [label="Ler situação inicial:\n1, 2 ou 3", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  G1 [label="Opção entre 1 e 3?", shape=diamond];
+  G2 [label="Erro: valor fora\ndo intervalo", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  H [label="Situação = Realizada?", shape=diamond];
+  H1 [label="qtdEfetiva = 0", shape=box];
+  I [label="Ler participantes\nefetivos: 0 a 99999", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  I1 [label="Efetivos > previstos?", shape=diamond];
+  I2 [label="Aviso: participação\nacima do previsto", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  J [label="Armazenar ação no vetor\ne somar 1 ao total", shape=box];
+  K [label="Ação cadastrada\ncom sucesso", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  Z [label="Retorna ao menu", shape=box, style="rounded,filled", fillcolor="#D9E2F3"];
+  X -> F [];
+  F -> F1 [];
+  F1 -> F2 [label="Não"];
+  F2 -> F [constraint=false];
+  F1 -> G [label="Sim"];
+  G -> G1 [];
+  G1 -> G2 [label="Não"];
+  G2 -> G [constraint=false];
+  G1 -> H [label="Sim"];
+  H -> H1 [label="Não"];
+  H -> I [label="Sim"];
+  I -> I1 [];
+  I1 -> I2 [label="Sim"];
+  I1 -> J [label="Não"];
+  I2 -> J [];
+  H1 -> J [];
+  J -> K [];
+  K -> Z [];
+  {rank=same; F1; F2;}
+  {rank=same; G1; G2;}
+  {rank=same; H; H1;}
+  {rank=same; I1; I2;}
+}

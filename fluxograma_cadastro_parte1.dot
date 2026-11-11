@@ -1,0 +1,42 @@
+digraph G {
+  graph [rankdir=TB, nodesep=0.22, ranksep=0.30, fontname="DejaVu Sans", bgcolor=white, pad=0.15, splines=true];
+  node  [fontname="DejaVu Sans", fontsize=12, style="filled", fillcolor="#F2F2F2", color="#555555", penwidth=1.1, margin="0.12,0.06"];
+  edge  [fontname="DejaVu Sans", fontsize=11, color="#444444", arrowsize=0.7, penwidth=1.0];
+  A [label="Início:\ncadastrarAcao", shape=box, style="rounded,filled", fillcolor="#D9E2F3"];
+  B [label="total >= MAX_ACOES?", shape=diamond];
+  B1 [label="Erro: limite de\narmazenamento atingido", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  Z [label="Retorna ao menu", shape=box, style="rounded,filled", fillcolor="#D9E2F3"];
+  C [label="Ler código", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  C1 [label="Inteiro maior que zero\ne não repetido?", shape=diamond];
+  C2 [label="Erro: código inválido\nou repetido", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  D [label="Ler próximo campo: escola, tema,\npúblico-alvo, responsável", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  D1 [label="Vazio ou com mais\nde 60 caracteres?", shape=diamond];
+  D2 [label="Erro: campo obrigatório\nou texto longo", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  D3 [label="Restam campos\nde texto?", shape=diamond];
+  E [label="Ler data prevista", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  E1 [label="Formato DD/MM/AAAA\ne data existente?", shape=diamond];
+  E2 [label="Erro: data inválida", shape=parallelogram, skew=0.25, margin="0.02,0.04"];
+  X [label="A", shape=circle, width=0.4, fixedsize=false];
+  A -> B [];
+  B -> B1 [label="Sim"];
+  B1 -> Z [];
+  B -> C [label="Não"];
+  C -> C1 [];
+  C1 -> C2 [label="Não"];
+  C2 -> C [constraint=false];
+  C1 -> D [label="Sim"];
+  D -> D1 [];
+  D1 -> D2 [label="Sim"];
+  D2 -> D [constraint=false];
+  D1 -> D3 [label="Não"];
+  D3 -> D [label="Sim", constraint=false];
+  D3 -> E [label="Não"];
+  E -> E1 [];
+  E1 -> E2 [label="Não"];
+  E2 -> E [constraint=false];
+  E1 -> X [label="Sim"];
+  {rank=same; B; B1;}
+  {rank=same; C1; C2;}
+  {rank=same; D1; D2;}
+  {rank=same; E1; E2;}
+}
